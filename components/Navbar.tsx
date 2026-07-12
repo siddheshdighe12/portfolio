@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 const navItems = [
@@ -21,8 +21,8 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: .7 }}
-        className="w-full max-w-6xl rounded-full border border-white/10 bg-[#120D22]/80 backdrop-blur-2xl"
+        transition={{ duration: 0.7 }}
+        className="w-full max-w-6xl overflow-hidden rounded-2xl border border-white/10 bg-[#120D22]/80 backdrop-blur-2xl md:rounded-full"
       >
 
         <div className="flex h-16 items-center justify-between px-7">
@@ -36,7 +36,7 @@ export default function Navbar() {
             <span className="text-violet-400">S</span>D
           </a>
 
-          {/* Desktop */}
+          {/* Desktop Menu */}
 
           <div className="hidden items-center gap-8 md:flex">
 
@@ -56,42 +56,68 @@ export default function Navbar() {
 
           <a
             href="/resume.pdf"
+            download
             className="hidden rounded-full bg-violet-600 px-5 py-2 text-sm transition hover:bg-violet-500 md:block"
           >
             Resume
           </a>
 
-          {/* Mobile */}
+          {/* Mobile Button */}
 
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden"
+            className="text-white md:hidden"
           >
-            {open ? <X size={20}/> : <Menu size={20}/>}
+            {open ? <X size={24} /> : <Menu size={24} />}
           </button>
 
         </div>
 
-        {open && (
-          <div className="border-t border-white/10 px-7 py-6 md:hidden">
+        {/* Mobile Menu */}
 
-            <div className="flex flex-col gap-5">
+        <AnimatePresence>
 
-              {navItems.map((item)=>(
+          {open && (
+
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="border-t border-white/10 md:hidden"
+            >
+
+              <div className="flex flex-col px-7 py-6">
+
+                {navItems.map((item) => (
+
+                  <a
+                    key={item.title}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="py-3 text-lg text-gray-300 transition hover:text-violet-400"
+                  >
+                    {item.title}
+                  </a>
+
+                ))}
+
                 <a
-                  key={item.title}
-                  href={item.href}
-                  onClick={()=>setOpen(false)}
-                  className="text-gray-300"
+                  href="/resume.pdf"
+                  download
+                  onClick={() => setOpen(false)}
+                  className="mt-5 rounded-full bg-violet-600 px-5 py-3 text-center font-medium transition hover:bg-violet-500"
                 >
-                  {item.title}
+                  Resume
                 </a>
-              ))}
 
-            </div>
+              </div>
 
-          </div>
-        )}
+            </motion.div>
+
+          )}
+
+        </AnimatePresence>
 
       </motion.nav>
 
