@@ -17,16 +17,13 @@ export default function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-6 z-50 flex justify-center px-5">
-
       <motion.nav
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7 }}
         className="w-full max-w-6xl overflow-hidden rounded-2xl border border-white/10 bg-[#120D22]/80 backdrop-blur-2xl md:rounded-full"
       >
-
         <div className="flex h-16 items-center justify-between px-7">
-
           {/* Logo */}
 
           <a
@@ -39,7 +36,6 @@ export default function Navbar() {
           {/* Desktop Menu */}
 
           <div className="hidden items-center gap-8 md:flex">
-
             {navItems.map((item) => (
               <a
                 key={item.title}
@@ -49,18 +45,7 @@ export default function Navbar() {
                 {item.title}
               </a>
             ))}
-
           </div>
-
-          {/* Resume */}
-
-          <a
-            href="/resume.pdf"
-            download
-            className="hidden rounded-full bg-violet-600 px-5 py-2 text-sm transition hover:bg-violet-500 md:block"
-          >
-            Resume
-          </a>
 
           {/* Mobile Button */}
 
@@ -70,15 +55,12 @@ export default function Navbar() {
           >
             {open ? <X size={24} /> : <Menu size={24} />}
           </button>
-
         </div>
 
         {/* Mobile Menu */}
 
         <AnimatePresence>
-
           {open && (
-
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
@@ -86,11 +68,8 @@ export default function Navbar() {
               transition={{ duration: 0.3 }}
               className="border-t border-white/10 md:hidden"
             >
-
               <div className="flex flex-col px-7 py-6">
-
                 {navItems.map((item) => (
-
                   <a
                     key={item.title}
                     href={item.href}
@@ -99,28 +78,12 @@ export default function Navbar() {
                   >
                     {item.title}
                   </a>
-
                 ))}
-
-                <a
-                  href="/resume.pdf"
-                  download
-                  onClick={() => setOpen(false)}
-                  className="mt-5 rounded-full bg-violet-600 px-5 py-3 text-center font-medium transition hover:bg-violet-500"
-                >
-                  Resume
-                </a>
-
               </div>
-
             </motion.div>
-
           )}
-
         </AnimatePresence>
-
       </motion.nav>
-
     </header>
   );
 }
