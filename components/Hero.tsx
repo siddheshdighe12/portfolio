@@ -89,7 +89,7 @@ export default function Hero() {
             </a>
 
             <a
-              href="https://www.linkedin.com/in/siddhesh-dighe-3a1428358/"
+              href="https://www.linkedin.com/in/siddhesh-dighe-a7042737a/"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border border-white/10 bg-white/5 p-4 transition hover:bg-violet-600"
